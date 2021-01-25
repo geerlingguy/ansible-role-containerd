@@ -1,8 +1,7 @@
 ---
 # Package options.
+containerd_package: containerd.io
 containerd_package_state: present
-containerd_package_deb: containerd
-containerd_package_rhel: containerd.io
 
 # Service options.
 containerd_service_state: started

@@ -31,8 +31,3 @@
     repo: "{{ docker_apt_repository }}"
     state: present
     update_cache: true
-
-- name: Ensure containerd is installed.
-  package:
-    name: "{{ containerd_package_deb }}"
-    state: "{{ containerd_package_state }}"

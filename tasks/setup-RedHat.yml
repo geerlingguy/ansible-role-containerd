@@ -24,8 +24,3 @@
   package:
     name: container-selinux
     state: present
-
-- name: Ensure containerd is installed.
-  package:
-    name: "{{ containerd_package_rhel }}"
-    state: "{{ containerd_package_state }}"
