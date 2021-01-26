@@ -34,3 +34,6 @@
     content: "{{ containerd_config_default.stdout }}"
   notify: restart containerd
   when: containerd_config_default_write
+
+- name: Ensure containerd is restarted immediately if necessary.
+  meta: flush_handlers
