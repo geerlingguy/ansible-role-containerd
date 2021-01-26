@@ -7,6 +7,9 @@ containerd_package_state: present
 containerd_service_state: started
 containerd_service_enabled: true
 
+# Write a default containerd config.toml file.
+containerd_config_default_write: true
+
 # Used only for Debian/Ubuntu. Switch 'stable' to 'nightly' if needed.
 docker_apt_release_channel: stable
 docker_apt_arch: amd64
