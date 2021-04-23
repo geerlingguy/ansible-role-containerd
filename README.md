@@ -26,6 +26,10 @@ Service controls. You can install containerd but not have it running or enabled 
 
 Write containerd defaults to the containerd config.toml file.
 
+    containerd_config_cgroup_driver_systemd: false
+
+Set systemd as cgroup driver in config.toml. Only valid with `containerd_config_default_write: true`
+
     docker_apt_release_channel: stable
     docker_apt_arch: amd64
     docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"

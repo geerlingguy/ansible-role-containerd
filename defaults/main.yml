@@ -10,6 +10,10 @@ containerd_service_enabled: true
 # Write a default containerd config.toml file.
 containerd_config_default_write: true
 
+# Set systemd as cgroup driver in config.toml
+# Only use with containerd_config_default_write: true
+containerd_config_cgroup_driver_systemd: false
+
 # Used only for Debian/Ubuntu. Switch 'stable' to 'nightly' if needed.
 docker_apt_release_channel: stable
 docker_apt_arch: amd64
