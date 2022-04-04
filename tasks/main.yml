@@ -33,6 +33,7 @@
     dest: /tmp/containerd_config.toml
     content: "{{ containerd_config_default.stdout }}"
   when: containerd_config_default_write
+  changed_when: false
 
 - name: Set Cgroup driver to systemd
   lineinfile:
@@ -41,6 +42,16 @@
     state: present
     path: /tmp/containerd_config.toml
   when: containerd_config_default_write and containerd_config_cgroup_driver_systemd
+  changed_when: false
+
+- name: Make sure  SystemdCgroup = false is not set
+  ansible.builtin.lineinfile:
+    path: /tmp/containerd_config.toml
+    state: absent
+    line: '            SystemdCgroup = false'
+  notify: restart containerd
+  when: containerd_config_default_write and containerd_config_cgroup_driver_systemd
+  changed_when: false
 
 - name: Copy config.toml to /etc/containerd
   copy:
@@ -54,6 +65,7 @@
   file:
     path: /tmp/containerd_config.toml
     state: absent
+  changed_when: false
 
 - name: Ensure containerd is restarted immediately if necessary.
   meta: flush_handlers
