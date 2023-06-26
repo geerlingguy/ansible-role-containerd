@@ -6,6 +6,7 @@
       - ca-certificates
       - gnupg2
     state: present
+    update_cache: true
 
 - name: Add Docker apt key.
   apt_key:
