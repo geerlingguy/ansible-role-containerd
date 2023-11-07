@@ -41,13 +41,10 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos8
-          - centos7
+          - rockylinux8
           - ubuntu2004
-          - ubuntu1804
-          - debian10
-          - debian9
-          - fedora31
+          - debian11
+          - fedora35
 
     steps:
       - name: Check out the codebase.
@@ -61,7 +58,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule[docker] docker
+        run: pip3 install ansible molecule molecule-plugins[docker] docker
 
       - name: Run Molecule tests.
         run: molecule test
