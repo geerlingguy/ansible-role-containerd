@@ -7,27 +7,27 @@
       - gnupg2
     state: present
 
+- name: Prepare apt keyring directory.
+  ansible.builtin.file:
+    path: "{{ docker_apt_keyring_file | dirname }}"
+    state: directory
+    mode: 0755
+
 - name: Add Docker apt key.
-  apt_key:
+  ansible.builtin.get_url:
     url: "{{ docker_apt_gpg_key }}"
-    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-    state: present
-  register: add_repository_key
-  ignore_errors: "{{ docker_apt_ignore_key_error }}"
+    dest: "{{ docker_apt_keyring_file }}"
+    mode: '0644'
+    force: true
 
-- name: Ensure curl is present (on older systems without SNI).
-  package: name=curl state=present
-  when: add_repository_key is failed
-
-- name: Add Docker apt key (alternative for older systems without SNI).
-  shell: >
-    curl -sSL {{ docker_apt_gpg_key }} | sudo apt-key add -
-  args:
-    warn: false
-  when: add_repository_key is failed
+- name: Be sure deprecated Docker repository is absent.
+  file: 
+    path: "/etc/apt/sources.list.d/download_docker_com_linux_ubuntu.list"
+    state: absent
 
 - name: Add Docker repository.
   apt_repository:
     repo: "{{ docker_apt_repository }}"
+    filename: docker.list
     state: present
     update_cache: true
