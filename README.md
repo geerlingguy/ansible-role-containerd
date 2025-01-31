@@ -1,6 +1,6 @@
 # Ansible Role: Containerd
 
-[![CI](https://github.com/geerlingguy/ansible-role-containerd/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-containerd/actions?query=workflow%3ACI)
+[![CI](https://github.com/geerlingguy/ansible-role-containerd/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-containerd/actions/workflows/ci.yml)
 
 An Ansible Role that installs [containerd](https://containerd.io) on Linux.
 
