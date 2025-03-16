@@ -7,13 +7,26 @@
       - gnupg2
     state: present
 
-- name: Add Docker apt key.
-  apt_key:
-    url: "{{ docker_apt_gpg_key }}"
-    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-    state: present
-  register: add_repository_key
-  ignore_errors: "{{ docker_apt_ignore_key_error }}"
+- name: "Remove old key"
+  ansible.builtin.apt_key:
+    id: '9DC858229FC7DD38854AE2D88D81803C0EBFCD88'
+    state: "absent"
+
+- name: "Remove old source.d"
+  ansible.builtin.file:
+    path: "/etc/apt/sources.list.d/download_docker_com_linux_ubuntu.list"
+    state: "absent"
+
+- name: "Docker Repo"
+  ansible.builtin.deb822_repository:
+    name: "docker"
+    types: "deb"
+    uris: "https://download.docker.com/linux/{{ ansible_distribution | lower }}"
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components:
+      - "{{ docker_apt_release_channel }}"
+    architectures: "{{ docker_apt_arch }}"
+    signed_by: "{{ docker_apt_gpg_key }}"
 
 - name: Ensure curl is present (on older systems without SNI).
   package: name=curl state=present
