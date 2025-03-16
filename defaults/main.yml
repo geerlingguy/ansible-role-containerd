@@ -14,6 +14,9 @@ containerd_config_default_write: true
 # Only use with containerd_config_default_write: true
 containerd_config_cgroup_driver_systemd: false
 
+# Disable setup tasks
+containerd_disable_setup: false
+
 # Used only for Debian/Ubuntu. Switch 'stable' to 'nightly' if needed.
 docker_apt_release_channel: stable
 docker_apt_arch: '{{ (ansible_architecture == "aarch64") | ternary("arm64", "amd64") }}'
