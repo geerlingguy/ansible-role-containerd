@@ -1,9 +1,13 @@
 ---
 - include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+  when: 
+    - ansible_os_family == 'RedHat'
+    - not containerd_disable_setup | bool
 
 - include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: 
+    - ansible_os_family == 'Debian'
+    - not containerd_disable_setup | bool
 
 - name: Ensure containerd is installed.
   package:
