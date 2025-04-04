@@ -16,7 +16,7 @@
   ignore_errors: "{{ docker_apt_ignore_key_error }}"
 
 - name: Ensure curl is present (on older systems without SNI).
-  apt: 
+  apt:
     name: curl
     state: present
   when: add_repository_key is failed
