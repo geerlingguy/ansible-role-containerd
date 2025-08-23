@@ -7,6 +7,7 @@
 
 - name: Ensure containerd is installed.
   package:
+    update_cache: true
     name: "{{ containerd_package }}"
     state: "{{ containerd_package_state }}"
 
