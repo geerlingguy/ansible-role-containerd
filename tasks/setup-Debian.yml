@@ -15,3 +15,7 @@
     components: "{{docker_apt_release_channel }}"
     signed_by: "{{ docker_apt_gpg_key }}"
   register: docker_repository
+
+- name: Explicitly update apt cache
+  apt:
+    update_cache: yes
