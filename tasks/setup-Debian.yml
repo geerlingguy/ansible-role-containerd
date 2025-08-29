@@ -19,4 +19,4 @@
 - name: Update Apt cache if repositories have changed
   apt:
     update_cache: true
-  when: docker_repository.changed
+  when: docker_repository is changed
