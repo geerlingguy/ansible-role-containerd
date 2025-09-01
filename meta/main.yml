@@ -14,8 +14,9 @@ galaxy_info:
         - all
     - name: Debian
       versions:
-        - stretch
-        - buster
+        - bullseye
+        - bookworm
+        - trixie
     - name: Ubuntu
       versions:
         - xenial

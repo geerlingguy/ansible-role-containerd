@@ -4,7 +4,7 @@ name: CI
   pull_request:
   push:
     branches:
-      - master
+      - '*'
   schedule:
     - cron: "0 7 * * 0"
 
@@ -44,6 +44,7 @@ jobs:
           - rockylinux9
           - ubuntu2004
           - debian11
+          - debian13
           - fedora35
 
     steps:
