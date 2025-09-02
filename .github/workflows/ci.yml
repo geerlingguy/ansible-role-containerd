@@ -44,6 +44,7 @@ jobs:
           - rockylinux9
           - ubuntu2004
           - debian11
+          - debian13
           - fedora35
 
     steps:

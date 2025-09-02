@@ -2,30 +2,21 @@
 - name: Ensure dependencies are installed.
   apt:
     name:
-      - apt-transport-https
-      - ca-certificates
-      - gnupg2
+      - python3-debian
     state: present
-
-- name: Add Docker apt key.
-  apt_key:
-    url: "{{ docker_apt_gpg_key }}"
-    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-    state: present
-  register: add_repository_key
-  ignore_errors: "{{ docker_apt_ignore_key_error }}"
-
-- name: Ensure curl is present (on older systems without SNI).
-  package: name=curl state=present
-  when: add_repository_key is failed
-
-- name: Add Docker apt key (alternative for older systems without SNI).
-  shell: >
-    curl -sSL {{ docker_apt_gpg_key }} | sudo apt-key add -
-  when: add_repository_key is failed
 
 - name: Add Docker repository.
-  apt_repository:
-    repo: "{{ docker_apt_repository }}"
+  deb822_repository:
+    name: docker
+    types: deb
+    uris: "{{ docker_apt_repository }}"
     state: present
+    suites: "{{ ansible_distribution_release }}"
+    components: "{{docker_apt_release_channel }}"
+    signed_by: "{{ docker_apt_gpg_key }}"
+  register: docker_repository
+
+- name: Update Apt cache if repositories have changed
+  apt:
     update_cache: true
+  when: docker_repository is changed
