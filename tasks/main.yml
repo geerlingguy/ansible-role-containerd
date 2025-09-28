@@ -37,7 +37,7 @@
 
 - name: Set Cgroup driver to systemd
   lineinfile:
-    insertafter: '.*\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options\]$'
+    insertafter: '.*\[plugins\."io\.containerd\.grpc\.v1\.cri"\.containerd\.runtimes\.runc\.options\]$'
     line: '            SystemdCgroup = true'
     state: present
     path: /tmp/containerd_config.toml
