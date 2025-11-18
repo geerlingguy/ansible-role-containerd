@@ -28,6 +28,10 @@ Write containerd defaults to the containerd config.toml file.
 
     containerd_config_cgroup_driver_systemd: false
 
+Disable install/ setup process for enterprise environments
+
+    containerd_disable_setup: true
+
 Set systemd as cgroup driver in config.toml. Only valid with `containerd_config_default_write: true`
 
     docker_apt_release_channel: stable
