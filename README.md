@@ -31,13 +31,13 @@ Write containerd defaults to the containerd config.toml file.
 Set systemd as cgroup driver in config.toml. Only valid with `containerd_config_default_write: true`
 
     docker_apt_release_channel: stable
-    docker_apt_repository: "https://download.docker.com/linux/{{ ansible_distribution | lower }}"
+    docker_apt_repository: "https://download.docker.com/linux/{{ ansible_facts.distribution | lower }}"
     docker_apt_ignore_key_error: true
-    docker_apt_gpg_key: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    docker_apt_gpg_key: https://download.docker.com/linux/{{ ansible_facts.distribution | lower }}/gpg
 
 Apt installation paramemeters, useful if you want to switch from the stable channel releases, or install on a different CPU architecture (e.g. `arm64`).
 
-    docker_yum_repo_url: https://download.docker.com/linux/{{ (ansible_distribution == "Fedora") | ternary("fedora","centos") }}/docker-ce.repo
+    docker_yum_repo_url: https://download.docker.com/linux/{{ (ansible_facts.distribution == "Fedora") | ternary("fedora","centos") }}/docker-ce.repo
     docker_yum_repo_enable_nightly: '0'
     docker_yum_gpg_key: https://download.docker.com/linux/centos/gpg
 

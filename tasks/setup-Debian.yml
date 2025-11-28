@@ -11,7 +11,7 @@
     types: deb
     uris: "{{ docker_apt_repository }}"
     state: present
-    suites: "{{ ansible_distribution_release }}"
+    suites: "{{ ansible_facts.distribution_release }}"
     components: "{{docker_apt_release_channel }}"
     signed_by: "{{ docker_apt_gpg_key }}"
   register: docker_repository
