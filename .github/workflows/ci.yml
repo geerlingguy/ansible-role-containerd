@@ -42,10 +42,9 @@ jobs:
       matrix:
         distro:
           - rockylinux9
-          - ubuntu2004
-          - debian11
+          - ubuntu2404
           - debian13
-          - fedora35
+          - fedora42
 
     steps:
       - name: Check out the codebase.
